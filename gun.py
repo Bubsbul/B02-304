@@ -42,7 +42,6 @@ class Ball:
         self.vx = 0
         self.vy = 0
         self.color = random.choice(GAME_COLORS)
-        self.live = 30
 
     def move(self):
         """Переместить мяч по прошествии единицы времени.
@@ -52,7 +51,7 @@ class Ball:
         и стен по краям окна (размер окна 800х600).
         """
         self.vy = self.vy - g
-        if self.x - self.r >= 790:
+        if self.x - self.r >= 780:
             self.vx = -self.vx
         if self.y -self.r >= 500:
             if -4 < self.vy < 4:
@@ -101,7 +100,6 @@ class Ball_2:
         self.vx = 0
         self.vy = 0
         self.color = random.choice(GAME_COLORS)
-        self.live = 30
 
     def move(self):
         """Переместить мяч по прошествии единицы времени.
@@ -111,12 +109,12 @@ class Ball_2:
         и стен по краям окна (размер окна 800х600).
         """
         self.vy = self.vy - 0.3 * g
-        if self.x - self.r >= 790:
+        if self.x - self.r >= 780:
             self.vx = -self.vx
         if self.y -self.r >= 500:
             if -4 < self.vy < 4:
                 self.vy = 0
-                self.y = self.r + 501
+                self.y = - self.r + 501
             else:
                 self.vy = -self.vy / 1.5
             self.vx = self.vx / 1.05
@@ -150,7 +148,7 @@ class Gun:
         self.f2_power = 10
         self.f2_on = 0
         self.an = 1
-        self.x = 0
+        self.x = 30
         self.y = 500
         self.color = GREY
         self.r = 20
@@ -215,10 +213,10 @@ class Gun:
 
     def move(self):
         button = pygame.key.get_pressed()
-        if self.x <= 795:
+        if self.x <= 770:
             if button[pygame.K_RIGHT]:
                 self.x += 3
-        if self.x >= 5:
+        if self.x >= 30:
             if button[pygame.K_LEFT]:
                 self.x -= 3
 
@@ -262,10 +260,10 @@ class Target:
         self.vy += k
         self.x += self.vx
         self.y += self.vy
-        if self.x + self.r >= 800 or self.x + self.r <= self.r:
+        if self.x + self.r >= 800 or self.x - self.r <= 0:
             self.x = self.x
             self.vx = -self.vx
-        if self.y + self.r >= 560 or self.y + self.r <= self.r:
+        if self.y + self.r >= 560 or self.y - self.r <= 0:
             self.y = self.y
             self.vy = -self.vy
 
@@ -309,10 +307,10 @@ class Target2:
         self.vy += k
         self.x += self.vx
         self.y += self.vy
-        if self.x + self.r >= 800 or self.x + self.r <= self.r:
+        if self.x + self.r >= 800 or self.x - self.r <= 0:
             self.x = self.x
             self.vx = -self.vx
-        if self.y + self.r >= 560 or self.y + self.r <= self.r:
+        if self.y + self.r >= 560 or self.y - self.r <= 0:
             self.y = self.y
             self.vy = -self.vy
 
@@ -320,7 +318,7 @@ class Target2:
 class Plane:
     def __init__(self, screen):
         self.screen = screen
-        self.x = 0
+        self.x = 51
         self.y = 30
         self.color = BLACK
         self.r = 30
@@ -334,10 +332,10 @@ class Plane:
     def move(self):
         global x_plane
         button = pygame.key.get_pressed()
-        if self.x <= 795:
+        if self.x <= 765:
             if button[pygame.K_d]:
                 self.x += 3
-        if self.x >= 5:
+        if self.x >= 51:
             if button[pygame.K_a]:
                 self.x -= 3
         x_plane = self.x
